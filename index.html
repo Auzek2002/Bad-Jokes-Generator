@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Jokes</title>
+    <link rel="stylesheet" href="style.css">
+    <link
+      rel="stylesheet"
+      href="path/to/font-awesome/css/font-awesome.min.css"
+    />
+    <script
+      src="https://kit.fontawesome.com/1b94c89d79.js"
+      crossorigin="anonymous"
+    ></script>
+</head>
+<body>
+    <div class="container">
+        <div class="heading">Bad Jokes Generator!</div>
+        <div class="button">
+            <button class="btn" onclick="jokes()">Click</button>
+        </div>
+        <div class="joke-display">
+            <h1 class="error">
+                Error! No Jokes Found!
+            </h1>
+            <h1 class="type">
+                <span>Type: </span><span id="Type"></span>
+            </h1>
+            <h1 class="set-up">
+                <span>Setup: </span><span id="Setup"></span>
+            </h1>
+            <h1 class="Punchline">
+                <span>PunchLine: </span><span id="punchline"></span>
+            </h1>
+        </div>
+        <div class="links">
+            <ul class="list">
+                <li><a href="https://www.linkedin.com/in/azaan-nabi-khan-552ba9228/" target="_blank"><i class="fa-brands fa-linkedin-in  fa-lg" id="linkedin" style="color: #1a4899;"></i></a></li>
+                <li><a href="https://www.instagram.com/azaan_u_khan/?hl=en" target="_blank"><i class="fa-brands fa-instagram  fa-lg" id="insta"  style="color: #c12fb5;"></i></a></li>
+                <li><a href="https://github.com/Auzek2002" target="_blank"><i class="fa-brands fa-github fa-lg" id="git"  style="color: #3a9856;"></i></a></li>
+                <li><a href="https://twitter.com/AzaanKh92902724" target="_blank"><i class="fa-brands fa-twitter fa-lg" id="twitter"  style="color: #2181e8;"></i></a></li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        const api="https://official-joke-api.appspot.com/random_joke";
+        const btn= document.querySelectorAll(".button .btn");
+        async function jokes(){
+            let response = await fetch(api);
+            let data = await response.json();
+            console.log(data);
+            if(response.status == 404){
+                document.querySelector(".error").style.display= "block";
+                document.querySelector(".type").style.display= "none";
+                document.querySelector(".set-up").style.display= "none";
+                document.querySelector(".Punchline").style.display= "none";
+            }
+            else{
+            document.querySelector(".joke-display #Type").innerHTML = data.type;
+            document.querySelector(".joke-display #Setup").innerHTML = data.setup;
+            document.querySelector(".joke-display #punchline").innerHTML = data.punchline;
+
+                document.querySelector(".error").style.display= "none";
+                document.querySelector(".type").style.display= "block";
+                document.querySelector(".set-up").style.display= "block";
+                document.querySelector(".Punchline").style.display= "block";
+            
+            }
+        }
+
+        
+       
+    </script>
+</body>
+</html>
